@@ -2,7 +2,7 @@ import tkinter as tk
 from datetime import datetime, timedelta
 import time
 
-# Указываем целевую дату
+# Date
 target_year = 2024
 target_month = 3
 target_day = 4
@@ -24,13 +24,9 @@ def calculate_time_until_date():
 
 def update_time_label():
     months, days, hours, minutes, seconds, milliseconds = calculate_time_until_date()
-
-    # Форматируем строку для вывода в верхнем таймере
     time_str = f"{months} months, {days} days, {hours} hours, {minutes} minutes, {seconds} seconds, {milliseconds} milliseconds"
     time_label.config(text=time_str)
-
-    # Обновляем метки для нижнего таймера
-    total_days = days + months * 30  # Учитываем месяцы в общем количестве дней
+    total_days = days + months * 30 
     total_seconds = total_days * 24 * 60 * 60 + hours * 60 * 60 + minutes * 60 + seconds
     seconds_label.config(text=f"Seconds: {total_seconds}")
     minutes_label.config(text=f"Minutes: {total_seconds // 60}")
@@ -38,17 +34,16 @@ def update_time_label():
     milliseconds_label.config(text=f"Milliseconds: {total_seconds * 1000 + milliseconds}")
     days_label.config(text=f"Days: {total_days}")
 
-    root.after(1, update_time_label)  # обновление каждые 100 миллисекунд
+    root.after(1, update_time_label) 
 
-# Создаем основное окно
 root = tk.Tk()
 root.title("Time Until Date App")
 
-# Метка для вывода времени в верхнем таймере
+
 time_label = tk.Label(root, text="", font=("Helvetica", 16))
 time_label.pack(pady=10)
 
-# Метки для вывода времени в нижнем таймере
+
 days_label = tk.Label(root, text="Days: 0", font=("Helvetica", 12))
 days_label.pack()
 
@@ -64,8 +59,8 @@ seconds_label.pack()
 milliseconds_label = tk.Label(root, text="Milliseconds: 0", font=("Helvetica", 12))
 milliseconds_label.pack()
 
-# Запускаем отсчет приложения
+
 update_time_label()
 
-# Запускаем главный цикл приложения
+
 root.mainloop()
